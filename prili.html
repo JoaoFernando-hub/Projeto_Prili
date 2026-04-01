@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRILI Cosméticos — Alta Qualidade para Cabeleireiros</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #3d7a4f;
+    --green-light: #5aaa6e;
+    --green-dark: #1e3d27;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f5f0e8;
+    --dark: #111810;
+    --text: #2a2a2a;
+    --muted: #777;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(17,24,16,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    opacity: 1 !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem 8rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s ease forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.7);
+    max-width: 420px;
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s ease forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--green);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: background 0.25s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--cream);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(245,240,232,0.25);
+    transition: border-color 0.25s, color 0.25s;
+  }
+
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 50%, rgba(61,122,79,0.3) 0%, transparent 70%);
+  }
+
+  .hero-circle {
+    width: min(500px, 80%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(90,170,110,0.15), rgba(30,61,39,0.5) 60%, transparent);
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.4s ease forwards;
+  }
+
+  .hero-circle::after {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.08);
+  }
+
+  .hero-logo-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-align: center;
+    text-shadow: 0 0 80px rgba(201,168,76,0.3);
+  }
+
+  .hero-logo-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.6);
+    text-align: center;
+    margin-top: 0.3rem;
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  /* ── STATS ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .stat-item {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-right: 1px solid rgba(201,168,76,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(61,122,79,0.08); }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-top: 0.5rem;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 8rem 8rem; }
+
+  .section-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── STORY ── */
+  .story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: center;
+    background: radial-gradient(ellipse at 80% 50%, rgba(61,122,79,0.08) 0%, transparent 60%);
+  }
+
+  .story-text p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.72);
+    margin-bottom: 1.5rem;
+  }
+
+  .story-visual {
+    position: relative;
+  }
+
+  .story-card {
+    background: rgba(30,61,39,0.4);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    color: rgba(201,168,76,0.06);
+    position: absolute;
+    top: -2rem;
+    left: 1rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .story-card blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--cream);
+    position: relative;
+    z-index: 1;
+  }
+
+  .story-card cite {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 1.5rem;
+    font-style: normal;
+  }
+
+  /* ── PRODUCTS ── */
+  .products {
+    background: rgba(0,0,0,0.3);
+  }
+
+  .products-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: rgba(30,61,39,0.25);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(201,168,76,0.35);
+    background: rgba(30,61,39,0.5);
+  }
+
+  .product-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background: radial-gradient(circle, rgba(90,170,110,0.2), rgba(30,61,39,0.4));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.55);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonials::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 80%, rgba(61,122,79,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .testimonial-card {
+    background: rgba(20,35,22,0.6);
+    border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 4px;
+    padding: 2.2rem;
+    transition: border-color 0.3s;
+    position: relative;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(201,168,76,0.22);
+  }
+
+  .testimonial-card:first-child {
+    grid-column: 1 / -1;
+    background: rgba(30,61,39,0.35);
+    border-color: rgba(201,168,76,0.18);
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.8);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--cream);
+  }
+
+  .author-role {
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.45);
+    margin-top: 1px;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 8rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(30,61,39,0.5) 0%, rgba(17,24,16,0.8) 100%);
+    border-top: 1px solid rgba(201,168,76,0.12);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'PRILI';
+    font-family: 'Playfair Display', serif;
+    font-size: 18rem;
+    font-weight: 900;
+    color: rgba(201,168,76,0.03);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .cta-section .section-title {
+    max-width: 680px;
+    margin: 0 auto 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 3rem;
+  }
+
+  .cta-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    padding: 1.1rem 2.2rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: background 0.25s, transform 0.2s;
+  }
+
+  .btn-whatsapp:hover { background: #1dbd5a; transform: translateY(-2px); }
+
+  .btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    color: #fff;
+    text-decoration: none;
+    padding: 1.1rem 2.2rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: opacity 0.25s, transform 0.2s;
+  }
+
+  .btn-instagram:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .footer-social a {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+    50%       { opacity: 1;   transform: scaleY(1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 8rem 2.5rem 4rem; }
+    .hero-right { min-height: 320px; }
+    section { padding: 5rem 2.5rem; }
+    .story { grid-template-columns: 1fr; gap: 3rem; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonial-card:first-child { grid-column: auto; }
+    .stats { grid-template-columns: 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .cta-section { padding: 5rem 2.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PRILI</div>
+  <ul class="nav-links">
+    <li><a href="#story">Nossa História</a></li>
+    <li><a href="#products">Produtos</a></li>
+    <li><a href="#testimonials">Depoimentos</a></li>
+    <li><a href="https://wa.me/551981230046" class="nav-cta">Fale Conosco</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Cosméticos Profissionais</span>
+    <h1>Para o <em>profissional</em> que faz a diferença</h1>
+    <p>Alta qualidade e tecnologia pensadas para os melhores cabeleireiros. Produtos que entregam confiança e autoestima a cada cliente no salão.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/551981230046" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Falar pelo WhatsApp
+      </a>
+      <a href="#story" class="btn-secondary">Nossa História →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-circle">
+      <div>
+        <div class="hero-logo-big">PRILI</div>
+        <div class="hero-logo-sub">cosméticos</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>role</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item reveal">
+    <div class="stat-num">3.5k+</div>
+    <div class="stat-label">Seguidores</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.15s">
+    <div class="stat-num">278+</div>
+    <div class="stat-label">Publicações</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.3s">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Qualidade Garantida</div>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-text">
+    <p class="section-tag reveal">Nossa História</p>
+    <h2 class="section-title reveal">Nascida para <em style="font-style:italic;color:var(--gold)">empoderar</em> o cabeleireiro</h2>
+    <p class="reveal">Tive a oportunidade de trabalhar como vendedor em uma empresa de produtos para salão de renome no mercado. Aprendi rápido a lidar com o público — e a comissão baixa me fez buscar alternativas nesse mercado tão promissor.</p>
+    <p class="reveal">Passei a distribuir algumas marcas e a desenvolver conhecimentos mais profundos das necessidades que o profissional cabeleireiro tinha. Desbravei grandes regiões apresentando e garantindo a qualidade dos produtos, ganhei clientes e amigos.</p>
+    <p class="reveal">Logo passei a enxergar que eu poderia entregar o que os cabeleireiros precisavam: alta qualidade e preço justo. Foi então que nasceu a <strong style="color:var(--gold)">PRILI Cosméticos</strong> — para empoderar o profissional que tem um papel tão essencial na entrega de confiança e autoestima de cada cliente que entra em seu salão.</p>
+  </div>
+  <div class="story-visual reveal">
+    <div class="story-card">
+      <blockquote>
+        "Empoderar o profissional Cabeleireiro que tem um papel tão essencial na entrega de confiança e auto estima de cada cliente que entra em seu salão."
+      </blockquote>
+      <cite>— Matheus, Fundador da PRILI Cosméticos</cite>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header">
+    <div>
+      <p class="section-tag reveal">Linha de Produtos</p>
+      <h2 class="section-title reveal">O que a PRILI oferece</h2>
+    </div>
+    <a href="https://www.instagram.com/prili_cosmeticos" class="btn-secondary reveal" style="height:fit-content">Ver todos →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card reveal">
+      <div class="product-icon">✨</div>
+      <div class="product-name">Semi Definitiva</div>
+      <div class="product-desc">Tratamento de alto rendimento para cabelos lisos, sedosos e com brilho duradouro.</div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.1s">
+      <div class="product-icon">💧</div>
+      <div class="product-name">Progressiva</div>
+      <div class="product-desc">Fórmula avançada para disciplinar e alisar os fios com proteção e hidratação profunda.</div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.2s">
+      <div class="product-icon">🌿</div>
+      <div class="product-name">Progressiva Gel</div>
+      <div class="product-desc">Textura em gel para maior controle e definição, garantindo resultado profissional.</div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.3s">
+      <div class="product-icon">🔬</div>
+      <div class="product-name">Fluido Bifásico</div>
+      <div class="product-desc">Tratamento bifásico para hidratação intensa e desembaraço sem pesar nos fios.</div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.4s">
+      <div class="product-icon">🛡️</div>
+      <div class="product-name">Home No Frizz</div>
+      <div class="product-desc">Controle do volume e frizz para uso doméstico, mantendo o resultado do salão em casa.</div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.5s">
+      <div class="product-icon">🎨</div>
+      <div class="product-name">Pó Descolorante</div>
+      <div class="product-desc">Descoloração potente com alta performance, para os procedimentos mais exigentes do salão.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header">
+    <p class="section-tag reveal">Depoimentos</p>
+    <h2 class="section-title reveal">O que nossos <em style="font-style:italic;color:var(--gold)">parceiros</em> dizem</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Deus continue te abençoando, abençoando sua família. Fico muito feliz em trabalhar com seus produtos de excelência. Que a cada dia Deus abençoe vocês ainda mais!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">C</div>
+        <div>
+          <div class="author-name">Cabeleireira Parceira</div>
+          <div class="author-role">Cliente PRILI</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.1s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Matheus sempre nos atendendo com excelência e entregando produtos de qualidade. Obrigada por estar comigo na minha jornada!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Ana Paula</div>
+          <div class="author-role">Cabeleireira Profissional</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.2s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Profissional maravilhoso, produtos de excelência, dono de uma super educação. Parabéns Matheus — Deus abençoe!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div>
+          <div class="author-name">Maria</div>
+          <div class="author-role">Parceira PRILI</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.3s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Deus abençoe muito você, é uma pessoa maravilhosa. Obrigada por fazer parte dos sonhos de tantas pessoas como eu, cabeleireira. Até breve!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">J</div>
+        <div>
+          <div class="author-name">Joana</div>
+          <div class="author-role">Cabeleireira</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.4s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Satisfação total em ter você como parceiro. Linda história, ótimo parceiro — parabéns Matheus! Vocês merecem todo o sucesso!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div>
+          <div class="author-name">Roberta</div>
+          <div class="author-role">Parceira PRILI</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.5s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Ótimos produtos! Vocês são merecedores de todo o sucesso. Que Deus continue te abençoando!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">L</div>
+        <div>
+          <div class="author-name">Luciana</div>
+          <div class="author-role">Cabeleireira Parceira</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="section-tag reveal">Seja um Parceiro</p>
+  <h2 class="section-title reveal">Pronto para elevar o nível do seu salão?</h2>
+  <p class="reveal">Entre em contato e descubra como a PRILI Cosméticos pode transformar a qualidade dos seus atendimentos.</p>
+  <div class="cta-btns reveal">
+    <a href="https://wa.me/551981230046" class="btn-whatsapp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Falar pelo WhatsApp
+    </a>
+    <a href="https://www.instagram.com/prili_cosmeticos" class="btn-instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Ver no Instagram
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PRILI Cosméticos</div>
+  <p class="footer-copy">© 2024 PRILI Cosméticos — Todos os direitos reservados</p>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/prili_cosmeticos">Instagram</a>
+    <a href="https://wa.me/551981230046">WhatsApp</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
