@@ -7,15 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green: #3d7a4f;
-    --green-light: #5aaa6e;
-    --green-dark: #1e3d27;
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --cream: #f5f0e8;
-    --dark: #111810;
-    --text: #2a2a2a;
-    --muted: #777;
+    --green: #167119;
+    --green-light: #328140;
+    --green-dark: #8BA84B;
+    --gold: #87762E;
+    --gold-light: #87762E;
+    --cream: #8BA84B;
+    --dark: #caad36 (247, 247, 247);
+    --text: #1c1d1b;
+    --muted: #c7a924;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,7 +42,7 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed;
+    position: center;
     top: 0; left: 0; right: 0;
     z-index: 100;
     display: flex;
@@ -95,15 +95,15 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
+    position: center;
+    overflow: hidden
   }
 
   .hero-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10rem 4rem 6rem 8rem;
+    padding: 1rem 1rem 1rem 1rem;
     position: relative;
     z-index: 2;
   }
@@ -147,7 +147,7 @@
   .hero p {
     font-size: 1.05rem;
     line-height: 1.75;
-    color: rgba(245,240,232,0.7);
+    color: rgba(146, 137, 35, 0.7);
     max-width: 420px;
     margin-bottom: 2.8rem;
     opacity: 0;
@@ -210,14 +210,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 60% 50%, rgba(61,122,79,0.3) 0%, transparent 70%);
   }
 
   .hero-circle {
-    width: min(500px, 80%);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, rgba(90,170,110,0.15), rgba(30,61,39,0.5) 60%, transparent);
     border: 1px solid rgba(201,168,76,0.2);
     display: flex;
     align-items: center;
@@ -309,7 +304,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(245,240,232,0.5);
+    color: rgba(146, 137, 35, 0.7);
     margin-top: 0.5rem;
   }
 
@@ -331,6 +326,7 @@
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
+    color: #d4ffb5;
   }
 
   /* ── STORY ── */
@@ -345,7 +341,7 @@
   .story-text p {
     font-size: 1rem;
     line-height: 1.85;
-    color: rgba(245,240,232,0.72);
+    color: rgba(146, 137, 35, 0.7);
     margin-bottom: 1.5rem;
   }
 
@@ -354,7 +350,7 @@
   }
 
   .story-card {
-    background: rgba(30,61,39,0.4);
+    background: #EDE8D9;
     border: 1px solid rgba(201,168,76,0.15);
     border-radius: 4px;
     padding: 3rem;
@@ -366,7 +362,7 @@
     content: '"';
     font-family: 'Playfair Display', serif;
     font-size: 12rem;
-    color: rgba(201,168,76,0.06);
+    color: #EDE8D9;
     position: absolute;
     top: -2rem;
     left: 1rem;
@@ -396,7 +392,7 @@
 
   /* ── PRODUCTS ── */
   .products {
-    background: rgba(0,0,0,0.3);
+    background: #EDE8D9;
   }
 
   .products-header {
@@ -413,7 +409,7 @@
   }
 
   .product-card {
-    background: rgba(30,61,39,0.25);
+    background: #b4a97d;
     border: 1px solid rgba(201,168,76,0.1);
     border-radius: 4px;
     padding: 2.5rem 2rem;
@@ -446,12 +442,13 @@
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    color: #3c5840;
   }
 
   .product-desc {
     font-size: 0.82rem;
     line-height: 1.6;
-    color: rgba(245,240,232,0.55);
+    color: rgba(253, 253, 253, 0.884);
   }
 
   /* ── TESTIMONIALS ── */
@@ -489,17 +486,17 @@
   }
 
   .testimonial-card:hover {
-    border-color: rgba(201,168,76,0.22);
+    border-color: rgba(20,35,22,0.6);
   }
 
   .testimonial-card:first-child {
     grid-column: 1 / -1;
-    background: rgba(30,61,39,0.35);
+    background: rgba(20,35,22,0.6);
     border-color: rgba(201,168,76,0.18);
   }
 
   .stars {
-    color: var(--gold);
+    color: var(--yellow);
     font-size: 0.85rem;
     letter-spacing: 0.1em;
     margin-bottom: 1rem;
@@ -537,7 +534,7 @@
   .author-name {
     font-size: 0.82rem;
     font-weight: 500;
-    color: var(--cream);
+    color:rgba(127, 200, 149, 0.7);
   }
 
   .author-role {
@@ -638,6 +635,7 @@
     font-weight: 900;
     color: var(--gold);
     letter-spacing: 0.1em;
+    align-items: center;
   }
 
   .footer-copy {
@@ -734,8 +732,7 @@
   <div class="hero-right">
     <div class="hero-circle">
       <div>
-        <div class="hero-logo-big">PRILI</div>
-        <div class="hero-logo-sub">cosméticos</div>
+        <img src="prili logo-Picsart-BackgroundRemover.jpg" alt="Descrição da foto">
       </div>
     </div>
   </div>
@@ -896,6 +893,14 @@
         </div>
       </div>
     </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.6s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Amo essa marca, meu cabelo é encaracolado uso o cauter plus, mega leave-in não troco por nenhum outro.❤️👏👏"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">C</div>
+        <div>
+          <div class="author-name">Cris</div>
+          <div class="author-role">Cliente</div>
   </div>
 </section>
 
@@ -919,7 +924,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">PRILI Cosméticos</div>
-  <p class="footer-copy">© 2024 PRILI Cosméticos — Todos os direitos reservados</p>
+  <p class="footer-copy">© 2026 PRILI Cosméticos — Todos os direitos reservados</p>
   <div class="footer-social">
     <a href="https://www.instagram.com/prili_cosmeticos">Instagram</a>
     <a href="https://wa.me/551981230046">WhatsApp</a>
@@ -941,3 +946,6 @@
 </script>
 </body>
 </html>
+apps-fileview.texmex_20260311.11_p1
+PRILICOSMETICOS.html
+Exibindo PRILICOSMETICOS.html…
